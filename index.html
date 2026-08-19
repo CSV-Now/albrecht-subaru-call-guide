@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Albrecht Subaru Interactive Call Guide</title>
+<style>
+  :root{
+    --red:#ef1b23;
+    --green:#18d84b;
+    --paper:#ffffff;
+    --ink:#111111;
+    --border:#d1d5db;
+    --muted:#6b7280;
+    --accent-bg:#f3f4f6;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    background:#f5f5f5;
+    font-family:"Arial Narrow",Arial,sans-serif;
+    color:var(--ink);
+  }
+  #subaru-web-guide{
+    width:min(1200px,calc(100% - 24px));
+    margin:18px auto;
+    background:var(--paper);
+    padding:18px;
+  }
+  .topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:8px;
+    padding:8px 0 14px;
+    flex-wrap:wrap;
+  }
+  .topbar button{
+    border:1px solid var(--border);
+    border-radius:7px;
+    padding:8px 12px;
+    background:var(--paper);
+    color:var(--ink);
+    font-weight:700;
+    cursor:pointer;
+  }
+  .topbar button:disabled{opacity:.45;cursor:default}
+  .page-name{
+    font-size:12px;
+    color:var(--muted);
+    font-weight:700;
+  }
+  .page{
+    display:none;
+    background:var(--paper);
+    border:1px solid var(--border);
+    padding:18px;
+    min-height:680px;
+  }
+  .page.active{display:block}
+  .title{
+    text-align:center;
+    color:var(--red);
+    font-family:Impact,"Arial Narrow",sans-serif;
+    font-size:clamp(20px,3vw,29px);
+    letter-spacing:.03em;
+    margin-bottom:16px;
+  }
+  .node,.route-button{
+    border:2px solid var(--ink);
+    background:var(--paper);
+    color:var(--ink);
+    padding:10px;
+    font-weight:800;
+    line-height:1.1;
+    font-size:13px;
+    text-align:center;
+  }
+  .route-button{width:100%;cursor:pointer}
+  .route-button:hover,.route-button:focus,.jump:hover,.jump:focus{
+    outline:3px solid #fee2e2;
+    outline-offset:2px;
+  }
+  .left{text-align:left}
+  .red{color:var(--red)}
+  .label{
+    font-family:Georgia,serif;
+    font-style:italic;
+    font-weight:700;
+    text-align:center;
+    font-size:14px;
+  }
+  .vgreen,.vred{width:3px;height:26px;margin:auto}
+  .vgreen{background:var(--green)}
+  .vred{background:var(--red)}
+  .action{
+    border:2px solid var(--ink);
+    padding:10px;
+    background:var(--paper);
+    color:var(--red);
+    font-weight:900;
+    font-size:12px;
+    line-height:1.25;
+  }
+  .action-title{
+    font-family:Impact,"Arial Narrow",sans-serif;
+    font-size:17px;
+    margin-bottom:7px;
+  }
+  .response{
+    display:inline-block;
+    border:2px solid var(--ink);
+    border-bottom:0;
+    padding:3px 18px;
+    color:var(--red);
+    font-family:Impact,"Arial Narrow",sans-serif;
+    font-size:14px;
+  }
+  .page-number{
+    font-family:Impact,"Arial Narrow",sans-serif;
+    font-size:42px;
+    color:#2563eb;
+    text-align:center;
+  }
+  .two{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:32px;
+  }
+  .master{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+    align-items:start;
+  }
+  .offer-list{color:var(--red);font-weight:900}
+  .jump{
+    margin-top:10px;
+    border:2px solid var(--red);
+    padding:10px;
+    color:var(--red);
+    background:var(--paper);
+    font-weight:900;
+    width:100%;
+    cursor:pointer;
+  }
+  .footer-rule{
+    margin-top:18px;
+    border:2px solid var(--ink);
+    padding:10px;
+    text-align:center;
+    font-weight:900;
+  }
+  .grid-page{
+    display:grid;
+    grid-template-columns:55px 1fr;
+    gap:12px;
+  }
+  .mt-2{margin-top:8px}
+  .mt-3{margin-top:12px}
+  .mt-4{margin-top:16px}
+  @media(max-width:680px){
+    #subaru-web-guide{width:100%;margin:0;padding:10px}
+    .page{min-height:0;padding:12px}
+    .master,.two{grid-template-columns:1fr;gap:16px}
+    .grid-page{grid-template-columns:1fr}
+    .page-number{text-align:left;font-size:30px}
+  }
+</style>
+</head>
+<body>
+<div id="subaru-web-guide">
+  <div class="topbar">
+    <div>
+      <button type="button" id="backBtn">← Back</button>
+      <button type="button" id="homeBtn">Start Over</button>
+    </div>
+    <div class="page-name" id="pageName">PAGE 1 • MAIN CALL FLOW</div>
+  </div>
+
+  <section class="page active" data-page="1">
+    <div class="title">SUBARU CUSTOMER LOYALTY OUTBOUND CALL GUIDE</div>
+    <div class="master">
+      <div>
+        <div class="node">
+          Hi <strong>[FIRST NAME]</strong>! This is <strong>[AGENT NAME]</strong> calling on behalf of <strong>ALBRECHT SUBARU</strong> in Wakefield. We’re reaching out regarding a customer loyalty offer from the dealership. Did I catch you at a good time?
+        </div>
+
+        <div class="two mt-3">
+          <div>
+            <div class="label">Yes</div>
+            <div class="vgreen"></div>
+            <div class="node">
+              Great! Depending on what makes the most sense for you, we currently have:<br><br>
+              <span class="offer-list">$500 toward a vehicle purchase</span><br>
+              <span class="offer-list">$250 toward Subaru accessories</span><br>
+              <span class="offer-list">Complimentary oil change + multi-point inspection</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="label">No</div>
+            <div class="vred"></div>
+            <button type="button" class="route-button go" data-go="6">
+              No problem. What would be a more convenient time to call? I’ll make a note so we reach you when it works better.<br><br>
+              <span class="red">CLICK FOR CALLBACK PROCESS</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="node">
+          Are you currently considering <strong>replacing, upgrading, or trading</strong> your vehicle?
+        </div>
+
+        <div class="two mt-3">
+          <div>
+            <div class="label">Yes</div>
+            <div class="vgreen"></div>
+            <button type="button" class="route-button go" data-go="2">
+              <span class="red">VEHICLE OPPORTUNITY</span><br><br>
+              Great! Albrecht Subaru is offering <strong>$500 toward a vehicle purchase.</strong><br><br>
+              CLICK TO CONTINUE
+            </button>
+          </div>
+
+          <div>
+            <div class="label">No</div>
+            <div class="vred"></div>
+            <button type="button" class="route-button go" data-go="3">
+              <span class="red">SERVICE PIVOT</span><br><br>
+              Totally understand. When was the last time you had your Subaru serviced?<br><br>
+              CLICK TO CONTINUE
+            </button>
+          </div>
+        </div>
+
+        <div class="footer-rule">SALES → SERVICE → ACCESSORIES → CLOSE</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" data-page="2">
+    <div class="title">OUTCOME: CUSTOMER IS OPEN TO BUYING / UPGRADING / TRADING</div>
+    <div class="grid-page">
+      <div class="page-number">2</div>
+      <div>
+        <div class="response">RESPONSE</div>
+        <div class="node">
+          Great! As part of this campaign, Albrecht Subaru is offering <span class="red">$500 toward a vehicle purchase.</span> What are you currently driving, and is there a Subaru model you’ve been considering?
+        </div>
+
+        <div class="two mt-4">
+          <div>
+            <div class="label">Ready / Open to Visit</div>
+            <div class="vgreen"></div>
+            <div class="node">
+              Awesome. Let’s get a time on the books so the team can have everything ready for you. What works better, <strong>[OPTION 1]</strong> or <strong>[OPTION 2]</strong>?
+            </div>
+            <div class="vgreen"></div>
+            <div class="node">
+              Fantastic! I have you set for <strong>[DATE AND TIME]</strong> at Albrecht Subaru in Wakefield.<br><br>
+              Can I confirm this is the best number to reach you? Can you confirm the spelling of your first and last name?
+            </div>
+            <div class="action mt-3">
+              <div class="action-title">ACTION ITEMS:</div>
+              1. SET SALES APPOINTMENT IN APPROVED CRM.<br><br>
+              2. NOTE $500 VEHICLE PURCHASE OFFER.<br><br>
+              3. DOCUMENT VEHICLE / TRADE INTEREST.<br><br>
+              4. FOLLOW SUBARU SALES HANDOFF PROCESS.
+            </div>
+          </div>
+
+          <div>
+            <div class="label">Just Researching / Not Ready</div>
+            <div class="vred"></div>
+            <div class="node left">
+              No worries. I’d still like to make this useful for you.<br><br>
+              • What are you currently driving?<br><br>
+              • What type of vehicle are you considering?<br><br>
+              • Is anything specific holding you back right now: timing, trade value, payment, availability, or something else?<br><br>
+              • Is there a better time for someone from the sales team to follow up?
+            </div>
+            <div class="action mt-3">
+              <div class="action-title">ACTION ITEMS:</div>
+              1. UPDATE CRM WITH ALL NOTES.<br><br>
+              2. FORWARD HIGH-INTENT CUSTOMER TO SALES POC.<br><br>
+              3. CREATE FOLLOW-UP TASK IF REQUESTED.
+            </div>
+            <button type="button" class="jump go" data-go="3">CUSTOMER NOT BUYING? → TRY SERVICE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" data-page="3">
+    <div class="title">OUTCOME: CUSTOMER IS NOT SHOPPING FOR A VEHICLE</div>
+    <div class="grid-page">
+      <div class="page-number">3</div>
+      <div>
+        <div class="response">RESPONSE</div>
+        <div class="node">
+          Totally understand. Since you’re planning to keep your Subaru, the other offer that may be more useful is a <span class="red">complimentary oil change and multi-point inspection.</span> When was the last time you had your Subaru serviced?
+        </div>
+
+        <div class="two mt-4">
+          <div>
+            <div class="label">Due / Unsure</div>
+            <div class="vgreen"></div>
+            <div class="node">
+              No problem. We can help you take care of that while the complimentary offer is available. Would you like me to check some appointment times?
+            </div>
+            <div class="vgreen"></div>
+            <div class="node">
+              Great! What works better for you, <strong>[OPTION 1]</strong> or <strong>[OPTION 2]</strong>?
+            </div>
+            <div class="action mt-3">
+              <div class="action-title">ACTION ITEMS:</div>
+              1. BOOK APPROVED SERVICE IN XTIME.<br><br>
+              2. NOTE COMPLIMENTARY OIL CHANGE + MPI.<br><br>
+              3. CONFIRM DATE / TIME / VEHICLE / CALLBACK NUMBER.
+            </div>
+          </div>
+
+          <div>
+            <div class="label">Recently Serviced / Not Due</div>
+            <div class="vred"></div>
+            <div class="node">
+              Perfect, glad you’re staying on top of it. Is there anything else on the vehicle you’ve been meaning to have looked at?
+            </div>
+            <button type="button" class="jump go" data-go="5">REPAIR / WARNING LIGHT / NOISE → DIAGNOSTIC</button>
+            <button type="button" class="jump go" data-go="4">NO SERVICE NEED → TRY ACCESSORIES</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" data-page="4">
+    <div class="title">OUTCOME: CUSTOMER IS INTERESTED IN SUBARU ACCESSORIES</div>
+    <div class="grid-page">
+      <div class="page-number">4</div>
+      <div>
+        <div class="response">RESPONSE</div>
+        <div class="node">
+          Absolutely! As part of the campaign, Albrecht Subaru is offering <span class="red">$250 toward Subaru accessories.</span> Was there anything specific you’ve been considering for your vehicle?
+        </div>
+
+        <div class="two mt-4">
+          <div>
+            <div class="label">Yes</div>
+            <div class="vgreen"></div>
+            <div class="node left">
+              Great! Let me make a note of exactly what you’re looking for.<br><br>
+              Capture:<br>
+              • Accessory requested<br>
+              • Subaru model / year<br>
+              • Best callback number<br>
+              • Preferred timing
+            </div>
+            <div class="action mt-3">
+              <div class="action-title">ACTION ITEMS:</div>
+              1. DOCUMENT ACCESSORY INTEREST.<br><br>
+              2. FOLLOW APPROVED ACCESSORIES HANDOFF PROCESS.<br><br>
+              3. NOTE $250 ACCESSORY OFFER.
+            </div>
+          </div>
+
+          <div>
+            <div class="label">Not Sure / No</div>
+            <div class="vred"></div>
+            <div class="node">
+              No worries. If something comes to mind later, the dealership team can help you review available options. Is there anything service-related we can help you with while I have you?
+            </div>
+            <button type="button" class="jump go" data-go="3">ROUTINE SERVICE → PAGE 3</button>
+            <button type="button" class="jump go" data-go="5">REPAIR / DIAGNOSTIC → PAGE 5</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" data-page="5">
+    <div class="title">OUTCOME: CUSTOMER HAS A DIAGNOSTIC / REPAIR / OTHER SERVICE NEED</div>
+    <div class="grid-page">
+      <div class="page-number">5</div>
+      <div>
+        <div class="response">RESPONSE</div>
+        <div class="node">
+          Absolutely. Let me grab a little more information so we can make sure the Subaru service team gets you taken care of correctly.
+        </div>
+
+        <div class="two mt-4">
+          <div class="node left">
+            Capture:<br><br>
+            1. What is the customer experiencing?<br><br>
+            2. Year / model<br><br>
+            3. Approximate mileage<br><br>
+            4. When did it start?<br><br>
+            5. Any warning lights?<br><br>
+            6. Best callback number<br><br>
+            7. Preferred appointment timing
+          </div>
+
+          <div>
+            <div class="node"><strong>ARE WE APPROVED TO BOOK THIS TYPE OF SERVICE DIRECTLY?</strong></div>
+            <div class="two mt-3">
+              <div>
+                <div class="label">Yes</div>
+                <div class="vgreen"></div>
+                <div class="node">Book using the approved Xtime process.</div>
+              </div>
+              <div>
+                <div class="label">No</div>
+                <div class="vred"></div>
+                <div class="node">Forward complete details to the designated Subaru Service POC.</div>
+              </div>
+            </div>
+            <div class="action mt-4">
+              <div class="action-title">ACTION ITEMS:</div>
+              1. DOCUMENT FULL CUSTOMER CONCERN.<br><br>
+              2. DO NOT DIAGNOSE OR QUOTE REPAIR COST / TIME.<br><br>
+              3. ROUTE TO SERVICE WHEN STORE ASSISTANCE IS REQUIRED.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page" data-page="6">
+    <div class="title">COMMON OUTCOMES: NO APPOINTMENT</div>
+    <div class="grid-page">
+      <div class="page-number">6</div>
+      <div class="two">
+        <div>
+          <div class="response">CALL BACK LATER</div>
+          <div class="node">Absolutely. What would be a better day and time for us to reconnect?</div>
+          <div class="action mt-2">
+            <div class="action-title">ACTION ITEM:</div>
+            CREATE CALLBACK TASK WITH REQUESTED DATE / TIME AND UPDATE CRM.
+          </div>
+        </div>
+
+        <div>
+          <div class="response">ALREADY SCHEDULED</div>
+          <div class="node">Perfect, you’re already ahead of us. I’ll update our notes so we don’t keep reaching out unnecessarily.</div>
+          <div class="action mt-2">
+            <div class="action-title">ACTION ITEM:</div>
+            VERIFY EXISTING APPOINTMENT IF POSSIBLE AND UPDATE RECORD.
+          </div>
+        </div>
+
+        <div>
+          <div class="response">NOT INTERESTED</div>
+          <div class="node">Understood. Before I let you go, are you all set with service on your Subaru as well?</div>
+          <div class="action mt-2">
+            <div class="action-title">ACTION ITEM:</div>
+            MAKE ONE SERVICE PIVOT. IF STILL NOT INTERESTED, THANK CUSTOMER AND DISPOSITION ACCURATELY.
+          </div>
+          <button type="button" class="jump go" data-go="3">CUSTOMER ENGAGES ON SERVICE → PAGE 3</button>
+        </div>
+
+        <div>
+          <div class="response">DO NOT CONTACT</div>
+          <div class="node">Absolutely. I apologize for the inconvenience. I’ll make sure your record is updated so you aren’t contacted again.</div>
+          <div class="action mt-2">
+            <div class="action-title">ACTION ITEM:</div>
+            MARK DO NOT CONTACT IMMEDIATELY ACCORDING TO APPROVED PROCESS.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+  const root = document.getElementById('subaru-web-guide');
+  const pages = [...root.querySelectorAll('[data-page]')];
+  const pageName = root.querySelector('#pageName');
+  const backBtn = root.querySelector('#backBtn');
+  const homeBtn = root.querySelector('#homeBtn');
+  const history = ['1'];
+
+  const names = {
+    '1':'PAGE 1 • MAIN CALL FLOW',
+    '2':'PAGE 2 • VEHICLE OPPORTUNITY',
+    '3':'PAGE 3 • SERVICE PIVOT',
+    '4':'PAGE 4 • ACCESSORIES',
+    '5':'PAGE 5 • DIAGNOSTIC / REPAIR',
+    '6':'PAGE 6 • OTHER OUTCOMES'
+  };
+
+  function showPage(id, push = true) {
+    pages.forEach(p => p.classList.toggle('active', p.dataset.page === id));
+    pageName.textContent = names[id] || '';
+    if (push && history[history.length - 1] !== id) history.push(id);
+    backBtn.disabled = history.length <= 1;
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  root.querySelectorAll('.go').forEach(btn => {
+    btn.addEventListener('click', () => showPage(btn.dataset.go));
+  });
+
+  backBtn.addEventListener('click', () => {
+    if (history.length <= 1) return;
+    history.pop();
+    showPage(history[history.length - 1], false);
+  });
+
+  homeBtn.addEventListener('click', () => {
+    history.length = 0;
+    history.push('1');
+    showPage('1', false);
+  });
+
+  backBtn.disabled = true;
+})();
+</script>
+</body>
+</html>
