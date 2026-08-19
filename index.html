@@ -12,21 +12,34 @@
     --ink:#111111;
     --border:#d1d5db;
     --muted:#6b7280;
-    --accent-bg:#f3f4f6;
   }
+
   *{box-sizing:border-box}
+
+  html{
+    width:100%;
+    min-height:100%;
+    background:#ffffff;
+  }
+
   body{
     margin:0;
-    background:#f5f5f5;
+    width:100%;
+    min-height:100vh;
+    background:#ffffff;
     font-family:"Arial Narrow",Arial,sans-serif;
     color:var(--ink);
+    overflow-x:hidden;
   }
+
   #subaru-web-guide{
-    width:min(1200px,calc(100% - 24px));
-    margin:18px auto;
+    width:100%;
+    min-height:100vh;
+    margin:0;
     background:var(--paper);
-    padding:18px;
+    padding:clamp(10px,1.5vw,24px);
   }
+
   .topbar{
     display:flex;
     align-items:center;
@@ -35,6 +48,7 @@
     padding:8px 0 14px;
     flex-wrap:wrap;
   }
+
   .topbar button{
     border:1px solid var(--border);
     border-radius:7px;
@@ -44,20 +58,28 @@
     font-weight:700;
     cursor:pointer;
   }
-  .topbar button:disabled{opacity:.45;cursor:default}
+
+  .topbar button:disabled{
+    opacity:.45;
+    cursor:default;
+  }
+
   .page-name{
     font-size:12px;
     color:var(--muted);
     font-weight:700;
   }
+
   .page{
     display:none;
     background:var(--paper);
     border:1px solid var(--border);
-    padding:18px;
-    min-height:680px;
+    padding:clamp(12px,1.5vw,24px);
+    min-height:calc(100vh - 88px);
   }
+
   .page.active{display:block}
+
   .title{
     text-align:center;
     color:var(--red);
@@ -66,23 +88,34 @@
     letter-spacing:.03em;
     margin-bottom:16px;
   }
+
   .node,.route-button{
     border:2px solid var(--ink);
     background:var(--paper);
     color:var(--ink);
     padding:10px;
     font-weight:800;
-    line-height:1.1;
-    font-size:13px;
+    line-height:1.25;
+    font-size:clamp(13px,.95vw,17px);
     text-align:center;
   }
-  .route-button{width:100%;cursor:pointer}
-  .route-button:hover,.route-button:focus,.jump:hover,.jump:focus{
+
+  .route-button{
+    width:100%;
+    cursor:pointer;
+  }
+
+  .route-button:hover,
+  .route-button:focus,
+  .jump:hover,
+  .jump:focus{
     outline:3px solid #fee2e2;
     outline-offset:2px;
   }
+
   .left{text-align:left}
   .red{color:var(--red)}
+
   .label{
     font-family:Georgia,serif;
     font-style:italic;
@@ -90,23 +123,32 @@
     text-align:center;
     font-size:14px;
   }
-  .vgreen,.vred{width:3px;height:26px;margin:auto}
+
+  .vgreen,.vred{
+    width:3px;
+    height:26px;
+    margin:auto;
+  }
+
   .vgreen{background:var(--green)}
   .vred{background:var(--red)}
+
   .action{
     border:2px solid var(--ink);
     padding:10px;
     background:var(--paper);
     color:var(--red);
     font-weight:900;
-    font-size:12px;
+    font-size:clamp(12px,.82vw,15px);
     line-height:1.25;
   }
+
   .action-title{
     font-family:Impact,"Arial Narrow",sans-serif;
     font-size:17px;
     margin-bottom:7px;
   }
+
   .response{
     display:inline-block;
     border:2px solid var(--ink);
@@ -116,24 +158,32 @@
     font-family:Impact,"Arial Narrow",sans-serif;
     font-size:14px;
   }
+
   .page-number{
     font-family:Impact,"Arial Narrow",sans-serif;
     font-size:42px;
     color:#2563eb;
     text-align:center;
   }
+
   .two{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:32px;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:clamp(16px,2vw,32px);
   }
+
   .master{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:28px;
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    gap:clamp(18px,2vw,32px);
     align-items:start;
   }
-  .offer-list{color:var(--red);font-weight:900}
+
+  .offer-list{
+    color:var(--red);
+    font-weight:900;
+  }
+
   .jump{
     margin-top:10px;
     border:2px solid var(--red);
@@ -144,6 +194,7 @@
     width:100%;
     cursor:pointer;
   }
+
   .footer-rule{
     margin-top:18px;
     border:2px solid var(--ink);
@@ -151,23 +202,53 @@
     text-align:center;
     font-weight:900;
   }
+
   .grid-page{
     display:grid;
-    grid-template-columns:55px 1fr;
+    grid-template-columns:55px minmax(0,1fr);
     gap:12px;
   }
+
   .mt-2{margin-top:8px}
   .mt-3{margin-top:12px}
   .mt-4{margin-top:16px}
+
+  @media(max-width:900px){
+    .master{
+      grid-template-columns:1fr;
+      gap:20px;
+    }
+
+    .page{min-height:0}
+  }
+
   @media(max-width:680px){
-    #subaru-web-guide{width:100%;margin:0;padding:10px}
-    .page{min-height:0;padding:12px}
-    .master,.two{grid-template-columns:1fr;gap:16px}
+    #subaru-web-guide{
+      width:100%;
+      margin:0;
+      padding:10px;
+    }
+
+    .page{
+      min-height:0;
+      padding:12px;
+    }
+
+    .master,.two{
+      grid-template-columns:1fr;
+      gap:16px;
+    }
+
     .grid-page{grid-template-columns:1fr}
-    .page-number{text-align:left;font-size:30px}
+
+    .page-number{
+      text-align:left;
+      font-size:30px;
+    }
   }
 </style>
 </head>
+
 <body>
 <div id="subaru-web-guide">
   <div class="topbar">
@@ -180,6 +261,7 @@
 
   <section class="page active" data-page="1">
     <div class="title">SUBARU CUSTOMER LOYALTY OUTBOUND CALL GUIDE</div>
+
     <div class="master">
       <div>
         <div class="node">
@@ -243,10 +325,13 @@
 
   <section class="page" data-page="2">
     <div class="title">OUTCOME: CUSTOMER IS OPEN TO BUYING / UPGRADING / TRADING</div>
+
     <div class="grid-page">
       <div class="page-number">2</div>
+
       <div>
         <div class="response">RESPONSE</div>
+
         <div class="node">
           Great! As part of this campaign, Albrecht Subaru is offering <span class="red">$500 toward a vehicle purchase.</span> What are you currently driving, and is there a Subaru model you’ve been considering?
         </div>
@@ -255,14 +340,18 @@
           <div>
             <div class="label">Ready / Open to Visit</div>
             <div class="vgreen"></div>
+
             <div class="node">
               Awesome. Let’s get a time on the books so the team can have everything ready for you. What works better, <strong>[OPTION 1]</strong> or <strong>[OPTION 2]</strong>?
             </div>
+
             <div class="vgreen"></div>
+
             <div class="node">
               Fantastic! I have you set for <strong>[DATE AND TIME]</strong> at Albrecht Subaru in Wakefield.<br><br>
               Can I confirm this is the best number to reach you? Can you confirm the spelling of your first and last name?
             </div>
+
             <div class="action mt-3">
               <div class="action-title">ACTION ITEMS:</div>
               1. SET SALES APPOINTMENT IN APPROVED CRM.<br><br>
@@ -275,6 +364,7 @@
           <div>
             <div class="label">Just Researching / Not Ready</div>
             <div class="vred"></div>
+
             <div class="node left">
               No worries. I’d still like to make this useful for you.<br><br>
               • What are you currently driving?<br><br>
@@ -282,13 +372,17 @@
               • Is anything specific holding you back right now: timing, trade value, payment, availability, or something else?<br><br>
               • Is there a better time for someone from the sales team to follow up?
             </div>
+
             <div class="action mt-3">
               <div class="action-title">ACTION ITEMS:</div>
               1. UPDATE CRM WITH ALL NOTES.<br><br>
               2. FORWARD HIGH-INTENT CUSTOMER TO SALES POC.<br><br>
               3. CREATE FOLLOW-UP TASK IF REQUESTED.
             </div>
-            <button type="button" class="jump go" data-go="3">CUSTOMER NOT BUYING? → TRY SERVICE</button>
+
+            <button type="button" class="jump go" data-go="3">
+              CUSTOMER NOT BUYING? → TRY SERVICE
+            </button>
           </div>
         </div>
       </div>
@@ -297,10 +391,13 @@
 
   <section class="page" data-page="3">
     <div class="title">OUTCOME: CUSTOMER IS NOT SHOPPING FOR A VEHICLE</div>
+
     <div class="grid-page">
       <div class="page-number">3</div>
+
       <div>
         <div class="response">RESPONSE</div>
+
         <div class="node">
           Totally understand. Since you’re planning to keep your Subaru, the other offer that may be more useful is a <span class="red">complimentary oil change and multi-point inspection.</span> When was the last time you had your Subaru serviced?
         </div>
@@ -309,13 +406,17 @@
           <div>
             <div class="label">Due / Unsure</div>
             <div class="vgreen"></div>
+
             <div class="node">
               No problem. We can help you take care of that while the complimentary offer is available. Would you like me to check some appointment times?
             </div>
+
             <div class="vgreen"></div>
+
             <div class="node">
               Great! What works better for you, <strong>[OPTION 1]</strong> or <strong>[OPTION 2]</strong>?
             </div>
+
             <div class="action mt-3">
               <div class="action-title">ACTION ITEMS:</div>
               1. BOOK APPROVED SERVICE IN XTIME.<br><br>
@@ -327,11 +428,18 @@
           <div>
             <div class="label">Recently Serviced / Not Due</div>
             <div class="vred"></div>
+
             <div class="node">
               Perfect, glad you’re staying on top of it. Is there anything else on the vehicle you’ve been meaning to have looked at?
             </div>
-            <button type="button" class="jump go" data-go="5">REPAIR / WARNING LIGHT / NOISE → DIAGNOSTIC</button>
-            <button type="button" class="jump go" data-go="4">NO SERVICE NEED → TRY ACCESSORIES</button>
+
+            <button type="button" class="jump go" data-go="5">
+              REPAIR / WARNING LIGHT / NOISE → DIAGNOSTIC
+            </button>
+
+            <button type="button" class="jump go" data-go="4">
+              NO SERVICE NEED → TRY ACCESSORIES
+            </button>
           </div>
         </div>
       </div>
@@ -340,10 +448,13 @@
 
   <section class="page" data-page="4">
     <div class="title">OUTCOME: CUSTOMER IS INTERESTED IN SUBARU ACCESSORIES</div>
+
     <div class="grid-page">
       <div class="page-number">4</div>
+
       <div>
         <div class="response">RESPONSE</div>
+
         <div class="node">
           Absolutely! As part of the campaign, Albrecht Subaru is offering <span class="red">$250 toward Subaru accessories.</span> Was there anything specific you’ve been considering for your vehicle?
         </div>
@@ -352,6 +463,7 @@
           <div>
             <div class="label">Yes</div>
             <div class="vgreen"></div>
+
             <div class="node left">
               Great! Let me make a note of exactly what you’re looking for.<br><br>
               Capture:<br>
@@ -360,6 +472,7 @@
               • Best callback number<br>
               • Preferred timing
             </div>
+
             <div class="action mt-3">
               <div class="action-title">ACTION ITEMS:</div>
               1. DOCUMENT ACCESSORY INTEREST.<br><br>
@@ -371,11 +484,18 @@
           <div>
             <div class="label">Not Sure / No</div>
             <div class="vred"></div>
+
             <div class="node">
               No worries. If something comes to mind later, the dealership team can help you review available options. Is there anything service-related we can help you with while I have you?
             </div>
-            <button type="button" class="jump go" data-go="3">ROUTINE SERVICE → PAGE 3</button>
-            <button type="button" class="jump go" data-go="5">REPAIR / DIAGNOSTIC → PAGE 5</button>
+
+            <button type="button" class="jump go" data-go="3">
+              ROUTINE SERVICE → PAGE 3
+            </button>
+
+            <button type="button" class="jump go" data-go="5">
+              REPAIR / DIAGNOSTIC → PAGE 5
+            </button>
           </div>
         </div>
       </div>
@@ -384,10 +504,13 @@
 
   <section class="page" data-page="5">
     <div class="title">OUTCOME: CUSTOMER HAS A DIAGNOSTIC / REPAIR / OTHER SERVICE NEED</div>
+
     <div class="grid-page">
       <div class="page-number">5</div>
+
       <div>
         <div class="response">RESPONSE</div>
+
         <div class="node">
           Absolutely. Let me grab a little more information so we can make sure the Subaru service team gets you taken care of correctly.
         </div>
@@ -405,19 +528,24 @@
           </div>
 
           <div>
-            <div class="node"><strong>ARE WE APPROVED TO BOOK THIS TYPE OF SERVICE DIRECTLY?</strong></div>
+            <div class="node">
+              <strong>ARE WE APPROVED TO BOOK THIS TYPE OF SERVICE DIRECTLY?</strong>
+            </div>
+
             <div class="two mt-3">
               <div>
                 <div class="label">Yes</div>
                 <div class="vgreen"></div>
                 <div class="node">Book using the approved Xtime process.</div>
               </div>
+
               <div>
                 <div class="label">No</div>
                 <div class="vred"></div>
                 <div class="node">Forward complete details to the designated Subaru Service POC.</div>
               </div>
             </div>
+
             <div class="action mt-4">
               <div class="action-title">ACTION ITEMS:</div>
               1. DOCUMENT FULL CUSTOMER CONCERN.<br><br>
@@ -432,12 +560,17 @@
 
   <section class="page" data-page="6">
     <div class="title">COMMON OUTCOMES: NO APPOINTMENT</div>
+
     <div class="grid-page">
       <div class="page-number">6</div>
+
       <div class="two">
         <div>
           <div class="response">CALL BACK LATER</div>
-          <div class="node">Absolutely. What would be a better day and time for us to reconnect?</div>
+          <div class="node">
+            Absolutely. What would be a better day and time for us to reconnect?
+          </div>
+
           <div class="action mt-2">
             <div class="action-title">ACTION ITEM:</div>
             CREATE CALLBACK TASK WITH REQUESTED DATE / TIME AND UPDATE CRM.
@@ -446,7 +579,10 @@
 
         <div>
           <div class="response">ALREADY SCHEDULED</div>
-          <div class="node">Perfect, you’re already ahead of us. I’ll update our notes so we don’t keep reaching out unnecessarily.</div>
+          <div class="node">
+            Perfect, you’re already ahead of us. I’ll update our notes so we don’t keep reaching out unnecessarily.
+          </div>
+
           <div class="action mt-2">
             <div class="action-title">ACTION ITEM:</div>
             VERIFY EXISTING APPOINTMENT IF POSSIBLE AND UPDATE RECORD.
@@ -455,17 +591,26 @@
 
         <div>
           <div class="response">NOT INTERESTED</div>
-          <div class="node">Understood. Before I let you go, are you all set with service on your Subaru as well?</div>
+          <div class="node">
+            Understood. Before I let you go, are you all set with service on your Subaru as well?
+          </div>
+
           <div class="action mt-2">
             <div class="action-title">ACTION ITEM:</div>
             MAKE ONE SERVICE PIVOT. IF STILL NOT INTERESTED, THANK CUSTOMER AND DISPOSITION ACCURATELY.
           </div>
-          <button type="button" class="jump go" data-go="3">CUSTOMER ENGAGES ON SERVICE → PAGE 3</button>
+
+          <button type="button" class="jump go" data-go="3">
+            CUSTOMER ENGAGES ON SERVICE → PAGE 3
+          </button>
         </div>
 
         <div>
           <div class="response">DO NOT CONTACT</div>
-          <div class="node">Absolutely. I apologize for the inconvenience. I’ll make sure your record is updated so you aren’t contacted again.</div>
+          <div class="node">
+            Absolutely. I apologize for the inconvenience. I’ll make sure your record is updated so you aren’t contacted again.
+          </div>
+
           <div class="action mt-2">
             <div class="action-title">ACTION ITEM:</div>
             MARK DO NOT CONTACT IMMEDIATELY ACCORDING TO APPROVED PROCESS.
@@ -495,19 +640,29 @@
   };
 
   function showPage(id, push = true) {
-    pages.forEach(p => p.classList.toggle('active', p.dataset.page === id));
+    pages.forEach(page => {
+      page.classList.toggle('active', page.dataset.page === id);
+    });
+
     pageName.textContent = names[id] || '';
-    if (push && history[history.length - 1] !== id) history.push(id);
+
+    if (push && history[history.length - 1] !== id) {
+      history.push(id);
+    }
+
     backBtn.disabled = history.length <= 1;
     window.scrollTo({top:0,behavior:'smooth'});
   }
 
-  root.querySelectorAll('.go').forEach(btn => {
-    btn.addEventListener('click', () => showPage(btn.dataset.go));
+  root.querySelectorAll('.go').forEach(button => {
+    button.addEventListener('click', () => {
+      showPage(button.dataset.go);
+    });
   });
 
   backBtn.addEventListener('click', () => {
     if (history.length <= 1) return;
+
     history.pop();
     showPage(history[history.length - 1], false);
   });
